@@ -18,7 +18,7 @@ const Main = ({user, logoutUser}) => {
           color={colors.lightBlue500}
           backgroundColor={colors.lightBlue50}
         >
-          {user.userInfo.username.slice(0,1)}
+          {user && user.userInfo && user.userInfo.username ? user.userInfo.username.slice(0,1): null}
         </Avatar>
         }
       />

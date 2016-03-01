@@ -58,6 +58,10 @@ const Summary = ({user}) => {
 				<div className = 'summary'>
 					<div className = 'current-day-summary'>
 					<List subheader="Today's Nutrition Info">
+						<ListItem>
+						<MacroPieChart macroPercents={currDayPerc} />	
+						</ListItem>
+						<Divider insert={true} />
 						<ListItem primaryText= {"Calories Consumed Today: " + currDaySum['nf_calories']} />
 						<Divider insert={true} />
 						<ListItem primaryText={'Protein Consumed Today: ' + currDaySum['nf_protein'] + 'g'} />
@@ -89,12 +93,16 @@ const Summary = ({user}) => {
 						<ListItem primaryText={'Iron Consumed Today: ' + currDaySum['nf_iron'] + '% DV'} />
 						<Divider insert={true} />
 					</List>
-					<MacroPieChart macroPercents={currDayPerc} />	
-					<Divider insert={true} />
+					
 					</div>
 					<br></br>
 					<div className = 'nutr-average-summary'>
 					<List subheader="Daily Nutrition Averages">
+						<Divider insert={true} />
+						<ListItem> 
+						<ProgressBarContainer datedNutr={nutrByDate} />
+						</ListItem> 
+						<Divider insert={true} />
 						<ListItem primaryText= {"Daily Caloric Consumption: " + NFdailyAvg['nf_calories']} />
 						<Divider insert={true} />
 						<ListItem primaryText={'Daily Protein Consumption: ' + NFdailyAvg['nf_protein'] + 'g'} />
@@ -125,7 +133,6 @@ const Summary = ({user}) => {
 						<Divider insert={true} />
 						<ListItem primaryText={'Daily Iron Consumption: ' + NFdailyAvg['nf_iron'] + '% DV'} />
 						<Divider insert={true} />
-					<ProgressBarContainer datedNutr={nutrByDate} />
 					</List>
 					</div>
 				</div>
