@@ -9,6 +9,9 @@ import TableRowColumn from 'material-ui/lib/table/table-row-column';
 import TableBody from 'material-ui/lib/table/table-body';
 
 const Meal = ({meal, foods}) => {
+
+  let date = typeof meal.eatenAt === "string" ? meal.eatenAt.slice(0,10) : (new Date(meal.eatenAt)).toISOString().slice(0,10);
+
 	return (
 	<div className='meal-element'>
 		<Table>
@@ -19,7 +22,7 @@ const Meal = ({meal, foods}) => {
 		 >
         <TableRow>
           <TableHeaderColumn>
-          	<h3> Meal From: {meal.eatenAt.slice(0,10)}</h3>
+          	<h3> Meal From: {date}</h3>
           </TableHeaderColumn>
         </TableRow>
 				<NutritionCounter meals={[meal]} foods={foods} />
