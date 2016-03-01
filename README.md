@@ -91,6 +91,6 @@ The selectedFood component has a prop called selectedFoods (an array), which is 
 
 TECHNOLOGIES:
 
-Front-end: React, Redux, Gulp, Browserify. Note that a gulp file is setup to babelify and bundle all files on the client. If any change is made in the client files, run 'gulp' in the command-line to re-compile the bundle.js
+Front-end: React, Redux, Gulp, Browserify. Note that a gulp file is setup to babelify and bundle all files on the client. If any change is made in the client files, run 'gulp' in the command-line to re-compile the bundle.js. Also, in order to designate which files are to be babelified (due to ES6 syntax and JSX syntax), we adopted the file extension .jsx on those files so that we only transpile the right ones.
 
 Back-end: Mongodb, express, Nutrionix API
