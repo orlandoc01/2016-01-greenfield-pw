@@ -9,6 +9,9 @@ module.exports = function(app, express) {
 		res.redirect('/index.html');
 	});
 
+	//POST to loggin should check user's credentials and, if validated,
+	//create aa session on the reqest and send the user's stored Object
+	//from the database back to the client
 	app.post('/login', function(req, res) {
 		utils.checkUserAsync(req.body.username, req.body.password)
 		.then(function(result) {
@@ -25,6 +28,8 @@ module.exports = function(app, express) {
 		})
 	});
 
+	//GET to login should send the UserObj again if the session is validated
+	//or return invalid message if no session exists
 	app.get('/login', function(req, res) {
 		if(req.session.user) {
 			utils.sendUserStateInfoAsync(req.session.user)
@@ -36,7 +41,9 @@ module.exports = function(app, express) {
 		}
 	});
 
-
+	//POST to signup should make a new userObject in the db with the sent
+	//credentials, create a session on the reqest, and then send the new
+	//user's object that was created in the db back to the client
 	app.post('/signup', function(req, res) {
 	    utils.makeNewUserAsync(req.body.username, req.body.password)
 	    .then(function(result) {
@@ -63,6 +70,10 @@ module.exports = function(app, express) {
 		}
 	});
 
+	//Post to meals should contain a string which is parsed into a meals Object,
+	//containg timestamp, user data, and the foods consumed. This is then stored
+	//in the db and the new meal is sent back to the client (client currently does nothing
+	//with this response)
 	app.post('/meals', function(req, res) {
 	    var newMeal = req.body.meal;
 	    if (typeof req.body.meal === 'string') {
@@ -77,19 +88,9 @@ module.exports = function(app, express) {
 	    })
 	});
 
-	app.get('/meals', function(req, res) {
-		if(req.session.user) {
-			utils.checkMealsByUserAsync(req.session.username)
-			.then(function(meals) {
-				res.send(meals);
-			});
-		} else {
-			res.send('Please Log in to check meals.');
-		}
-	});
-
+	//POST to search should trigger a search on the server in the Nutrionix API for
+	//possible matches. These matches are sent back to the client as a result
 	app.post('/search', function(req, res) {
-		console.log('query req: ', req.body);
 		if (!req.body.query) return res.send('Invalid query');
 		var query = req.body.query.trim();
 		utils.getSearchResponseAsync(query)
@@ -101,7 +102,9 @@ module.exports = function(app, express) {
 		});
 	});
 
-
+	//A post to food id should contain a food_id value in the request body.
+	//This food id is used to query the Nutrionix API for a complete nutr profile
+	//of the food and this profile is stored in the db and sent back to the client
   app.post('/food_id', function(req, res) {
     if (!req.body['food_id']) return res.send('Invalid id');
     var id = req.body['food_id'].trim();
