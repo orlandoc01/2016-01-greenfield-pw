@@ -22,9 +22,13 @@ const Search = ({foodList, queryFoods, selectFood}) => {
 
   return (
     <div className='search'>
-      <input type="text" placeholder="What did you eat?" ref={(ref) => query = ref} />
-      <RaisedButton label="Submit" style={{margin:"8px"}} onMouseDown={handleSubmit}/>
-      <br/>
+      <div className='search-bar'>
+        <br/>
+        <h5>What did you eat?</h5>
+        <input type="text" ref={(ref) => query = ref} />
+        <RaisedButton label="Submit" style={{margin:"8px"}} onMouseDown={handleSubmit}/>
+        <br/><br/>
+      </div>
 
        <Table>
 

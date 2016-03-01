@@ -69,7 +69,7 @@ const SelectFood = ({selectedFoods, removeFood, user, sendMeal, sendFoodItems}) 
 
   return (
     <div className='select-food'>
-      <h5>What I Ate:</h5>
+      <h5 className="ate-header">Meal Items</h5>
       <Table>
 
         <TableHeader
