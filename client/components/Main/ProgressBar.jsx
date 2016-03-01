@@ -3,19 +3,27 @@ import {Line} from 'react-chartjs';
 import RaisedButton from 'material-ui/lib/raised-button';
 
 const ProgressBar = ({datedNutr, timeWindow, setTime, setFilter, filter}) => {
+	//Designed to allow multiple 'nutr filters' to be displayed at once on the 
+	//same axis. That it why there are multiple RGBfillColors and RGBstrokeColors
+	//For now however, only one filter can be displayed at a time
 	let filters = [filter];
 	let RGBfillColors = ['rgba(220,220,220,0.2)', 'rgba(151,187,205,0.2)', 
 											'rgba(120,100,145,0.2)', 'rgba(170,220,190,0.2)'];
 	let RGBstrokeColors = ['rgba(220,220,220,1)', 'rgba(151,187,205,1)', 
 											'rgba(120,100,145,1)', 'rgba(170,220,190,1)'];
 
+	//Filter for meals in the datedNutr object (key->date, value->average nutr info)
+	//which are within the time window specified
 	let mealsInTime =	_.pickBy(datedNutr, (nutr, date) => {
 			let currDate = new Date();
-			let mealDateChars = date.split('-');
+			let mealDateChars = date.split('-'); //Date stored as dd-mm-yyyy so split and feed into Date constructor
 			let mealDate = new Date(mealDateChars[2], mealDateChars[1], mealDateChars[0]);
 			return (Math.floor((currDate - mealDate)/(1000*60*60*24)) < timeWindow);
 	});	
 
+	//initalized linechartdata is fed as last parameter to _.transform, datasets are then added
+	//depending on the number of filters in the filters array, transforming the initial lineChartData
+	//for now however, there will always be one filter
 	let lineChartData = _.transform(filters, (prev, filter, i) => {
 		prev.datasets.push({
 			label: filter,

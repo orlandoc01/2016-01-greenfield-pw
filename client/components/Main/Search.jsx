@@ -9,16 +9,20 @@ import TableBody from 'material-ui/lib/table/table-body';
 import RaisedButton from 'material-ui/lib/raised-button';
 
 const Search = ({foodList, queryFoods, selectFood}) => {
+  //Will store user's search query
   let query;
 
+  //On submit, send a query to the server to match possible foods
   let handleSubmit = (e) => {
     e.preventDefault();
     queryFoods(query.value);
   }
 
+  //clicking a food in the results should add it to selectedFoods
   let onFoodClick = (food) => {
     selectFood(food);
   }
+
 
   return (
     <div className='search'>
@@ -31,25 +35,15 @@ const Search = ({foodList, queryFoods, selectFood}) => {
       </div>
 
        <Table>
-
-        <TableHeader
-          displaySelectAll={false}
-        >
+        <TableHeader displaySelectAll={false} >
           <TableRow>
-            <TableHeaderColumn>
-              <h5>Description</h5>
-            </TableHeaderColumn>
-            <TableHeaderColumn>
-              <h5>Serving Size</h5>
-            </TableHeaderColumn>
-            <TableHeaderColumn>
-            </TableHeaderColumn>
+            <TableHeaderColumn><h5>Description</h5></TableHeaderColumn>
+            <TableHeaderColumn><h5>Serving Size</h5></TableHeaderColumn>
+            <TableHeaderColumn></TableHeaderColumn>
           </TableRow>
         </TableHeader>
 
-        <TableBody
-          displayRowCheckbox={false}
-        >
+        <TableBody displayRowCheckbox={false} >
         {_.values(foodList).map( (food, i) => {
           return (
               <Food

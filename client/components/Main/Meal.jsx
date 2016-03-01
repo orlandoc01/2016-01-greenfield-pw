@@ -9,28 +9,22 @@ import TableRowColumn from 'material-ui/lib/table/table-row-column';
 import TableBody from 'material-ui/lib/table/table-body';
 
 const Meal = ({meal, foods}) => {
-
+	//When adding a new meal without re-rendering the page, it is initially saved as a number (in milli)
+	//The check below corrects for this condition. Getting meals from the server however already have
+	//the date as a string, so there's no need to parse them
   let date = typeof meal.eatenAt === "string" ? meal.eatenAt.slice(0,10) : (new Date(meal.eatenAt)).toISOString().slice(0,10);
 
 	return (
 	<div className='meal-element'>
 		<Table>
-
-		 <TableHeader
-		 	className='meal-title'
-		 	displaySelectAll={false}
-		 >
+		 <TableHeader className='meal-title' displaySelectAll={false} >
         <TableRow>
-          <TableHeaderColumn>
-          	<h3> Meal From: {date}</h3>
-          </TableHeaderColumn>
+          <TableHeaderColumn><h3>Meal From: {date}</h3></TableHeaderColumn>
         </TableRow>
 				<NutritionCounter meals={[meal]} foods={foods} />
       </TableHeader>
 
-      <TableBody
-      	displayRowCheckbox={false}
-      >
+      <TableBody displayRowCheckbox={false}>
 			{_.keys(meal.foodsEaten).map((foodId) => {
 				let name = foods[foodId]['item_name'];
 				return (

@@ -1,5 +1,4 @@
 import React from 'react';
-import NavButton from './NavButton.jsx';
 import Tabs from 'material-ui/lib/tabs/tabs.js';
 import Tab from 'material-ui/lib/tabs/tab.js';
 import CalorieLog from './CalorieLog.jsx';

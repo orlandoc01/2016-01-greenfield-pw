@@ -6,24 +6,19 @@ import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 import ContentRemove from 'material-ui/lib/svg-icons/content/remove';
 
 const Food = ({food, key, buttonAction, buttonIcon, numEaten, eatenInMeal}) => {
-  let name;
-  let brand;
+  let name = food['item_name'];
+  let brand = food['brand_name'];
 
-  // if (food) {
-    name = food['item_name'];
-    brand = food['brand_name'];
-  // }
 
+  //The below options, buttonColumn, servingColumn, and inputColumn are optional params
+  //that if present, render another column in the returned tableRow
   let buttonColumn;
   if(buttonAction){
     buttonColumn = (
       <TableRowColumn>
-        <FloatingActionButton
-          onMouseDown={buttonAction}
-          onTouchStart={buttonAction}
-          mini={true}
-          secondary={true}>
-          {buttonIcon === 'add' ? <ContentAdd /> : <ContentRemove />}
+        <FloatingActionButton onMouseDown={buttonAction}
+         onTouchStart={buttonAction} mini={true} secondary={true}>
+        {buttonIcon === 'add' ? <ContentAdd /> : <ContentRemove />}
         </FloatingActionButton>
       </TableRowColumn>
     );
@@ -55,20 +50,15 @@ const Food = ({food, key, buttonAction, buttonIcon, numEaten, eatenInMeal}) => {
     </TableRowColumn>
    }
 
-    // Assign Icon based on Button Action
     return (
       <TableRow className='food-item'>
         {inputColumn} 
-        <TableRowColumn>
-          <h5>{name}</h5>
-          <h6>{brand}</h6>
-        </TableRowColumn>
+        <TableRowColumn><h5>{name}</h5><h6>{brand}</h6></TableRowColumn>
         {servingColumn}
         {calorieColumn}
         {buttonColumn}
       </TableRow>
     )
-    
 }
 
 export default Food;
