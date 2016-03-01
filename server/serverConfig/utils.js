@@ -35,6 +35,7 @@ module.exports.getSearchResponse = function(query, callback) {
 /*  takes in a food id and finds the food object
  *  first checks to see if the food is found in the database
  *  if not in the database, makes a get req to the nutritionix API
+ *  and stores the result from the nutrionix req in the db
  */
 module.exports.getFoodItem = function(id, callback) {
   Foods.find({'item_id':id})
@@ -127,19 +128,29 @@ module.exports.checkMealsByUser = function(username, callback) {
     });
 };
 
+//Creates the user object corresponding to the username and sends it in a callback
 module.exports.sendUserStateInfo = function(username, callback) {
-    Promise.all([Users.findAsync({username:username}),
-        Meals.findAsync({eatenBy:username})])
+    //First the user entry is found and all meals matching the usernames are found
+    //in the Promise.all method below. Result[0] -> user entry, Result[1] -> all meals by user
+    Promise.all([Users.findAsync({username:username}), Meals.findAsync({eatenBy:username})])
         .then(function(results){
+            //We need to attach to the userObj a foods property, with all the nutr info for
+            //each food item. Thus, for each food entry within meals.foodsEaten, we store the
+            //id as a key and a promise to grab the nutr info as the value.
             var mapIdsToFoods = {};
             results[1].forEach( function(meal) {
               _.keys(meal.foodsEaten).forEach( function(foodId, index) {
                 mapIdsToFoods[foodId] = module.exports.getFoodItemAsync(foodId);
               });
             });
+            //We then execute all the promises in the mapping object with Promise.props
+            //Essentially, the functoin performs this operation
+            // {food_id: PromiseToGrabFoods} -> {food_id: grabbedFoodProfileString}
             Promise.props(mapIdsToFoods)
             .then(function(foodStrings) {
+              //the results are jsonStrings which need to be parsed
               var foods = _.mapValues(foodStrings, JSON.parse);
+              //info object is finally constructed and returned
               var infoObj = {
                   userInfo: _.omit(results[0][0], ['password','salt']),
                   meals: results[1],
@@ -150,7 +161,6 @@ module.exports.sendUserStateInfo = function(username, callback) {
             .catch(function(err) {
               callback(err, null);
             });
-
         })
         .catch(function(err){
             callback(err, null);

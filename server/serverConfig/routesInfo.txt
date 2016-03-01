@@ -39,11 +39,6 @@ POST /search
 ->Res: server makes get request to Nutrionix and responds with res.result where result is
        the result object obtained from the Nutrionix API
 
-GET /meals
-->Use: Client makes this request to receive all the meals the session user has eaten
-->Req: no data passed in the req.body
-->Res: if user is logged in, sends back meals array, else sends back 'Please Log in to check meals.'
-
 POST /meals
  ->Use: Client has added a meal entry for logging
  ->Req: req.body.meal, meal is an object
