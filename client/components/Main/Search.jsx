@@ -36,9 +36,14 @@ const Search = ({foodList, queryFoods, selectFood}) => {
           displaySelectAll={false}
         >
           <TableRow>
-            <TableHeaderColumn>Name</TableHeaderColumn>
-            <TableHeaderColumn>Made By</TableHeaderColumn>
-            <TableHeaderColumn></TableHeaderColumn>
+            <TableHeaderColumn>
+              <h5>Description</h5>
+            </TableHeaderColumn>
+            <TableHeaderColumn>
+              <h5>Serving Size</h5>
+            </TableHeaderColumn>
+            <TableHeaderColumn>
+            </TableHeaderColumn>
           </TableRow>
         </TableHeader>
 

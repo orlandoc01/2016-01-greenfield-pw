@@ -9,10 +9,10 @@ const Food = ({food, key, buttonAction, buttonIcon, numEaten, eatenInMeal}) => {
   let name;
   let brand;
 
-  if (food) {
+  // if (food) {
     name = food['item_name'];
     brand = food['brand_name'];
-  }
+  // }
 
   let buttonColumn;
   if(buttonAction){
@@ -34,7 +34,7 @@ const Food = ({food, key, buttonAction, buttonIcon, numEaten, eatenInMeal}) => {
     eatenInMeal = eatenInMeal || food.nf_serving_size_qty;
     servingColumn = (
       <TableRowColumn>
-        <p>{ eatenInMeal + " - " +food.nf_serving_size_unit}</p>
+        <h5>{ eatenInMeal + " - " +food.nf_serving_size_unit}</h5>
       </TableRowColumn>
     );
    }
@@ -43,7 +43,7 @@ const Food = ({food, key, buttonAction, buttonIcon, numEaten, eatenInMeal}) => {
   if(numEaten){
     inputColumn = (
       <TableRowColumn>
-        <input type="number" ref = {numEaten} placeholder={1}/>
+        <input type="number" ref = {numEaten} placeholder={0}/>
       </TableRowColumn>
     );
    }

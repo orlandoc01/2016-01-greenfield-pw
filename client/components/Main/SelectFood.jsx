@@ -76,10 +76,16 @@ const SelectFood = ({selectedFoods, removeFood, user, sendMeal, sendFoodItems}) 
           displaySelectAll={false}
         >
           <TableRow>
-            <TableHeaderColumn>Quantity</TableHeaderColumn>
-            <TableHeaderColumn>Name</TableHeaderColumn>
-            <TableHeaderColumn>Made By</TableHeaderColumn>
-            <TableHeaderColumn></TableHeaderColumn>
+            <TableHeaderColumn>
+              <h5>Quantity</h5>
+            </TableHeaderColumn>
+            <TableHeaderColumn>
+              <h5>Description</h5>
+            </TableHeaderColumn>
+            <TableHeaderColumn>
+            </TableHeaderColumn>
+            <TableHeaderColumn>
+            </TableHeaderColumn>
           </TableRow>
         </TableHeader>
          {selectedFoodsDisplay}
