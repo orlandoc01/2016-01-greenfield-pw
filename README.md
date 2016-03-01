@@ -6,7 +6,7 @@ based on their use.
 
 2) Containers: Stored in the containers folder, these components are mapped to some presentational components within the components folder. These components are created via redux's connect method and essentially connect props on the presentaional view components to the different values on the state or dispatches to the state through functions. They can be though of as wiring between the presentational components and the global state object and handle purely data mutation and changes within the state. They contain no view logic or DOM manipulation which alter what the user sees. A naming method was chosen to easily tell which container matches to a component. Given a presentational component with a name such as 'value', if there is a container to match it, it is named 'valueContainer'
 
-The main thing to understand is the flow of information between client and server, which can be summarized in the following sections described below.
+With that in mind, the main thing to understand in our application is the flow of information between client and server, which can be summarized in the following sections described below.
 
 
 AUTHENTICATION
