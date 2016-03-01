@@ -1,4 +1,5 @@
-'{
+Fully fleshed out user object (still implementing user-specific info)
+{
     "user":{
         "_id": 000000000,
         "firstName": "Allen",
@@ -25,18 +26,18 @@
         },
     },
 
-    "meals": { 
-            "mealId":  {
+    "meals": [
+                {
                 "_id": 0000000001,
                 "createdAt": 00000000,
                 "eatenAt": 00000000,
                 "eatenBy": "allenjprice",
-                "food": {
+                "foodsEaten": {
                     "513fc9cb673c4fbc26005252": 3
-                } //three tacos
-            } ,
+                    } //three tacos
+                }
+    ],
 
-    },
 
     "foods":{
         "513fc9cb673c4fbc26005252": {

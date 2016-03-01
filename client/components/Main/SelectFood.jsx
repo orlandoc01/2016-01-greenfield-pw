@@ -53,9 +53,7 @@ const SelectFood = ({selectedFoods, removeFood, user, sendMeal, sendFoodItems}) 
     selectedFoodsDisplay = <div>No entry selected</div>;
   } else {
     selectedFoodsDisplay = (
-      <TableBody
-         displayRowCheckbox={false}
-      >
+      <TableBody displayRowCheckbox={false} >
         { _.values(selectedFoods).map((food, index) => {
           let id = food['item_id'];
           return (

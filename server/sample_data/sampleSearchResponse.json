@@ -1,4 +1,5 @@
-sample response
+sample response for search.
+Server only returns array at 'hits' key
 
 {
  "total_hits": 4544,
